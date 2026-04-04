@@ -1,5 +1,18 @@
 ---
+import { unknown } from "astro:schema"
 
+const pageTitle = "About Me "
+
+const identity = {
+    firstName: "Paul",
+    lastName: "Stockton",
+    country: "UK",
+    occupation: "WebDeveloper",
+    hobbies: ["Mountaineering", "Running"]
+};
+
+const skills = ["HTML", "CSS", "Wordpress", "Webflow", "Copywriting", "Design"
+];
 ---
 
 <html lang="en">
@@ -9,12 +22,18 @@
         <link rel="icon" href="/favicon.ico" />
         <meta name="viewport" content="width=device-width" />
         <meta name="generator" content={Astro.generator} />
-        <title>Astro</title>
+        <title>{pageTitle}</title>
+
+        <style>
+            h1 {
+                color: red;
+            }
+        </style>
     </head>
     <body>
         <a href="/">Home</a>
-        <a href="/about">About</a>
-        <a href="/blog">Blog</a>
+        <a href="/about/">About</a>
+        <a href="/blog/">Blog</a>
         <h1>About Me</h1>
         <h2>... and my new Astro site!</h2>
 
@@ -27,5 +46,16 @@
             This site will update as I complete more of the tutorial, so keep
             checking back and see how my journey is going!
         </p>
+        <p>Here are a few things about me: </p>
+        <ul>
+            <li>My name is {identity.firstName} {identity.lastName}</li>
+            <li>I come from the {identity.country} and I work as a {identity.occupation}</li>
+            {identity.hobbies.length >= 2 &&
+            <li>I like {identity.hobbies[0]} and {identity.hobbies[1]}</li>}
+        </ul>
+<p>My skillsets include:</p>
+<ul>
+    {skills.map((skill) => <li>{skill}</li>)}
+</ul>
     </body>
 </html>
